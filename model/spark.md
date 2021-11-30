@@ -38,9 +38,22 @@ def predict_all_of_the_things(df):
     print(outdf.head(10))
     return outdf.select(["user_id", "rawPrediction", "probability", "prediction"])
 
-    
-
-
-
 ```
+
+#### spark StringIndexer is like scikitlearn's LabelEncoder
+Given a dataframe `flugts` and a categorical col `blah` ,  we can do a `fit` , `transform` , kind of like in scikitlearn.
+
+```python
+from pyspark.ml.feature import StringIndexer
+
+flugts = StringIndexer(
+    inputCol="blah", 
+    outputCol="blah_index"
+).fit(
+    flugts
+).transform(
+    flugts
+)
+```
+
 
