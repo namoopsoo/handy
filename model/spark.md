@@ -56,4 +56,21 @@ flugts = StringIndexer(
 )
 ```
 
+#### Decision tree classifier
+
+```python
+from pyspark.ml.classification import DecisionTreeClassifier
+model = DecisionTreeClassifier.fit(foo_train)
+prediction = model.transform(foo_test)
+```
+*  This will produce two new columns, in prediction, 
+*   "prediction" and "probability"
+* quick confusion matrix , if you also for instance, had the "label" column,
+
+```python
+prediction.groupBy("label", "prediction").count().show()
+```
+
+
+
 
