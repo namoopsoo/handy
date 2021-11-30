@@ -71,6 +71,13 @@ prediction = model.transform(foo_test)
 prediction.groupBy("label", "prediction").count().show()
 ```
 
+#### Train test split
+A Dataframe has this built in func, 
 
+```python
+train, test = mydf.randomSplit([0.8, 0.2], seed=42)
+```
+
+But it does not produce separate X/y train/test variables the way that is typical in scikitlearn. Maybe that is a helper func that is available.
 
 
