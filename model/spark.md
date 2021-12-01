@@ -71,6 +71,12 @@ prediction = model.transform(foo_test)
 prediction.groupBy("label", "prediction").count().show()
 ```
 
+#### Logistic Regression 
+
+```python
+frmo pyspark.ml.classification import LogisticRegression
+```
+
 #### Train test split
 A Dataframe has this built in func, 
 
@@ -80,4 +86,14 @@ train, test = mydf.randomSplit([0.8, 0.2], seed=42)
 
 But it does not produce separate X/y train/test variables the way that is typical in scikitlearn. Maybe that is a helper func that is available.
 
+#### Getting fancier with evaluation 
+Given a `prediction` dataframe with columns, `label` and `prediction` , which have been calculated at a particular threshold, we can evaluate as follows,
 
+```python
+from pyspark.ml.evaluation import MulticlassClassificationEvaluator
+evaluator = MulticlassClassificationEvaluator()
+evaluator.evaluate(prediction, {evaluator.metricName: "weightedPrecision"})
+evaluator.evaluate(prediction, {evaluator.metricName: "weightedRecall"})
+evaluator.evaluate(prediction, {evaluator.metricName: "accuracy"})
+evaluator.evaluate(prediction, {evaluator.metricName: "f1"})
+```
