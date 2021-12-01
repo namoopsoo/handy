@@ -188,3 +188,18 @@ DenseVector([1, 0, 0, 0, 0, 7, 0, 0]) # each value is kept
 SparseVector(8, {0: 1.0, 5: 7.0})
 ```
 
+#### Bucketing
+
+```python
+from pyspark.ml.feature import Bucketizer
+
+bucketizer = Bucketizer(
+    splits=[20, 30, 40, 50],
+    inputCol="age",
+    outputCol="age_bin"
+)
+df = bucketizer.transform(df)
+
+```
+Similar to categorical encoding benefiting from one hot encoding, bucketing will also benefit from one hot encoding
+
