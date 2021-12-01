@@ -74,7 +74,22 @@ prediction.groupBy("label", "prediction").count().show()
 #### Logistic Regression 
 
 ```python
-frmo pyspark.ml.classification import LogisticRegression
+from pyspark.ml.classification import LogisticRegression
+```
+
+#### Linear Regression
+
+```python
+from pyspark.ml.regression import LinearRegression
+from pyspark.ml.evaluation import RegressionEvaluator
+regression = LinearRegression(labelCol="the_label_col")
+regression = regression.fit(train_df)
+predictions = regression.transform(test_df)
+regression.intercept
+regression.coefficients # <== weights for the regression 
+RegressionEvaluator(labelCol="the_label_col").evaluate(predictions)
+
+# "mean absolute error" => "mae"
 ```
 
 #### Train test split
