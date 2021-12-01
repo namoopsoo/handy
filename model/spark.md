@@ -97,6 +97,29 @@ evaluator.evaluate(predictions, {evaluator.metricName: "mae"}) # "mean absolute 
 evaluator.evaluate(predictions, {evaluator.metricName: "r2"})
 ```
 
+#### And Linear Regression with regularization
+* Lambda term =0 ==> no regularization
+* Lambda term =inf ==> complete regularization , all coefficients are zero.
+* Ridge 
+```python
+ridge = LinearRegression(
+    labelCol="my_label",
+    elasticNetParam=0,
+    regParam=0.1
+)
+ridge.fit(train_df)
+```
+* Lasso
+```python
+lasso = LinearRegression(
+    labelCol="my_label",
+    elasticNetParam=1,
+    regParam=0.1
+)
+lasso.fit(train_df)
+```
+
+
 #### Train test split
 A Dataframe has this built in func, 
 
