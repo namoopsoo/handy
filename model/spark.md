@@ -104,3 +104,49 @@ auc = binary_evaluator.evaluate(
     {binary_evaluator.metricName: "areaUnderROC"}
 )
 ```
+
+### Text
+
+#### Simple regex substitution
+```python
+from pyspark.sql.functions import regexp_replace
+REGEX = '[,\\-]'
+df = df.withColumn('text', regexp_replace(books.text, REGEX, ' '))
+```
+
+#### Tokenization
+Create a new column with an array of words from free form text. 
+```python
+from pyspark.ml.feature import Tokenizer
+df = Tokenizer(inputCol="text", outputCol="tokens").transform(df)
+
+```
+Remove stop words
+```python
+from pyspark.ml.feature import StopWordsRemover
+stopwords = StopWordsRemover()
+
+stopwords.getStopWords()
+['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', 'your', 'yours','yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', 'her', 'hers', 'herself','it', 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which','who', 'whom', 'this', 'that', 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be','been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', ...]
+
+# Specify the input and output column names
+stopwords = stopwords.setInputCol('tokens').setOutputCol('words')
+df = stopwords.transform(df)
+```
+
+#### Term frequency transformer
+
+```python
+from pyspark.ml.feature import HashingTF
+hasher = HashingTF(inputCol="words", outputCol="hash", numFeatures=32)
+df = hasher.transform(df)
+
+```
+And we can do page-rank like proportional inverted indexing too
+
+```python
+from pyspark.ml.feature import IDF
+df = IDF(inputCol="hash", outputCol="features").fit(df).transform(df)
+
+```
+
