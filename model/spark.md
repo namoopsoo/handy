@@ -150,3 +150,21 @@ df = IDF(inputCol="hash", outputCol="features").fit(df).transform(df)
 
 ```
 
+#### One Hot Encoding
+Spark uses a sparse representation of one-hot-encoded features
+```python
+from pyspark.ml.feature import OneHotEncoderEstimator
+onehot = OneHotEncoderEstimator(inputCols=["type_blah"], outputCols=["type_one_hot"])
+onehot.fit(df)
+
+onehot.categorySizes # <== gives how many categories processed.
+df = onehot.transform(df)
+```
+A `SparseVector` takes the length of the vector as the first arg and a key-val dict for the sparse values
+```python
+from pyspark.mllib.linalg import DenseVector, SparseVector
+DenseVector([1, 0, 0, 0, 0, 7, 0, 0]) # each value is kept
+
+SparseVector(8, {0: 1.0, 5: 7.0})
+```
+
