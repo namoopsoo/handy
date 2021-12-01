@@ -96,4 +96,11 @@ evaluator.evaluate(prediction, {evaluator.metricName: "weightedPrecision"})
 evaluator.evaluate(prediction, {evaluator.metricName: "weightedRecall"})
 evaluator.evaluate(prediction, {evaluator.metricName: "accuracy"})
 evaluator.evaluate(prediction, {evaluator.metricName: "f1"})
+
+from pyspark.ml.evaluation import BinaryClassificationEvaluator
+binary_evaluator = BinaryClassificationEvaluator()
+auc = binary_evaluator.evaluate(
+    prediction,
+    {binary_evaluator.metricName: "areaUnderROC"}
+)
 ```
