@@ -163,6 +163,14 @@ plt.show()
 
 <img src="https://github.com/seanickle/handy/blob/master/assets/ks.png">
 
+### Weighted Precision
+* Had to reverse engineer this from the source code here , https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html  ... 
+* But for a 2 class classification problem weighted precision is basically weighing correctness of positive predictions and correctness of negative predictions, proportional to the number of positive and negative labels in the data. 
+ 
+```
+weighted_precision = [(TN/(FN + TN)) * ((size (label = N))/( size (total)))]  + [(TP/(FP + TP)) * ((size(label = P))/(size (total)))]
+```
+
 
 ### References
 * https://www.datavedas.com/model-evaluation-in-python/
