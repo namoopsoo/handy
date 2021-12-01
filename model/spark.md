@@ -87,9 +87,14 @@ regression = regression.fit(train_df)
 predictions = regression.transform(test_df)
 regression.intercept
 regression.coefficients # <== weights for the regression 
+
+# using whatever the default evaluator is ... ( rmse I think)
 RegressionEvaluator(labelCol="the_label_col").evaluate(predictions)
 
-# "mean absolute error" => "mae"
+# And also if "predictions_col" is where predictions are , 
+evaluator = RegressionEvaluator(labelCol="the_label_col").setPredictionCol("predictions_col")
+evaluator.evaluate(predictions, {evaluator.metricName: "mae"}) # "mean absolute error"
+evaluator.evaluate(predictions, {evaluator.metricName: "r2"})
 ```
 
 #### Train test split
