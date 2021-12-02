@@ -206,6 +206,7 @@ df = stopwords.transform(df)
 ```
 
 #### Term frequency transformer
+HashingTF , will use a hash algo `MurmurHash 3` (not sure why not a more well known hash func) , to map to an integer from `1` to a default of `262,144` . (Oh  that's probably part of the difference, using an integer as opposed to a long 256 bit output hash then) . And the output will include the frequency of the hashed output.
 
 ```python
 from pyspark.ml.feature import HashingTF
@@ -218,6 +219,42 @@ And we can do page-rank like proportional inverted indexing too
 ```python
 from pyspark.ml.feature import IDF
 df = IDF(inputCol="hash", outputCol="features").fit(df).transform(df)
+
+```
+
+#### pipeline for some of these NLP steps
+Below, assume we have an input dataframe with some kind of `raw_text` column that has free form text. Then the below pipeline can tokenize that text, remove stop words, and create a term frequency inverted index, 
+
+```python
+from pyspark.ml.feature import Tokenizer, StopWordsRemover, HashingTF, IDF
+from pyspark.ml.regression import LogisticRegression
+from pyspark.ml.feature import Pipeline
+
+tokenizer = Tokenizer(
+    inputCol="raw_text", outputCol="tokens"
+)
+
+remover = StopWordsRemover(
+    inputCol="tokens", outputCol="terms"
+)
+
+hasher = HashingTF(
+    inputCol="terms", outputCol="hash"
+)
+idf = IDF(
+    inputCol="hash", outputCol="features"
+)
+
+logistic = LogisticRegression()
+pipeline = Pipeline(
+    stages=[
+        tokenizer,
+        remover,
+        hasher,
+        idf,
+        logistic,
+    ]
+)
 
 ```
 
