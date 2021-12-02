@@ -17,9 +17,6 @@ def predict_all_of_the_things(df):
         "f3",        
     ], outputCol="features")
 
-    # df = vector_assembler.transform(df)
-    # print(df.toPandas().head(10))
-
     lr = LogisticRegression(
         featuresCol="features",
         labelCol="y_my_label",
@@ -28,17 +25,48 @@ def predict_all_of_the_things(df):
         elasticNetParam=1,
         threshold=0.5,
         )
-    # blorModel = lr.fit(df)
 
     pipeline = Pipeline(stages=[vector_assembler, lr])
     e2e = pipeline.fit(df)
     
     outdf = e2e.transform(df)
-    # outdf.toPandas.head(10)
     print(outdf.head(10))
     return outdf.select(["user_id", "rawPrediction", "probability", "prediction"])
 
 ```
+
+#### Pipeline with train/test handling also
+
+```python
+from pyspark.ml.classification import LogisticRegression
+from pyspark.ml.linalg import Vectors
+from pyspark.ml.feature import VectorAssembler
+from pyspark.ml.feature import OneHotEncoderEstimator
+from pyspark.ml.feature import StringIndexer
+from pyspark.ml import Pipeline
+
+indexer = StringIndexer(...)
+onehot = OneHotEncoderEstimator(...)
+assemble = VectorAssembler(...)
+regression = LogisticRegression(...)
+pipeline = Pipeline(stages=[indexer, onehot, assemble, regression])
+
+blah_df = spark.read.csv(...)
+train_df, test_df = blah_df.randomSplit([0.8, 0.2], seed=42)
+
+# And now fit the pipeline only on the train part
+pipeline = pipeline.fit(train_df)
+
+# And predictions..
+predictions = pipeline.transform(test_df)
+```
+And the various stages of the pipeline are indexable, for example, to get the intercept and coefficient of the `regression` step, 
+
+```python
+print(pipeline.stages[3].intercept, pipeline.stages[3].coefficients)
+```
+Will produce the intercept `3.9` and coefficients, `DenseVector([...])` for the regression stage of the pipeline.
+
 
 #### spark StringIndexer is like scikitlearn's LabelEncoder
 Given a dataframe `flugts` and a categorical col `blah` ,  we can do a `fit` , `transform` , kind of like in scikitlearn.
