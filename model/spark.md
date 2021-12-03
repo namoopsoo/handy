@@ -301,7 +301,14 @@ Given a model and an evaluator, where the model can also be a pipeline,
 frmo pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 model = LinearRegression(labelCol="y_label")
 evaluator = RegressionEvaluator(labelCol="y_label")
-grid = ParamGridBuilder().build()
+
+grid = ParamGridBuilder() \
+    .addGrid(model.elasticNetParam, [0, 0.5, 1.]) \
+    .addGrid(model.regParam, [0.01, 0.1, 1, 10]) \
+    .addGrid(model.fitIntercept, [True, False]) \
+    .build()
+
+print("number of models to be built from the grid =>", len(grid))
 
 cv = CrossValidator(
     estimator=model,
@@ -312,6 +319,22 @@ cv = CrossValidator(
 )
 
 cv.fit(train_df)
-cv.avgMetrics # <== this is the average metric whatever it is.
+
+# the average metric whatever it is, for each combo in the grid.
+cv.avgMetrics 
+
+# can use the best model like this,
+cv.bestModel.transform(test_df) 
+
+# Can also use the best model implicitly...
+cv.transform(test_df)
+
+# You can get some quick documentation like this wow. Neat trick.
+cv.bestModel.explainParam("elasticNetParam")
+
 
 ```
+
+### References
+A lot of this was inspired by [this great DataCamp course](https://campus.datacamp.com/courses/machine-learning-with-pyspark) . 
+
