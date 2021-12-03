@@ -337,6 +337,20 @@ for param, val in cv.bestModel.extractParamMap():
     print((param.name, val), f"({param.doc})")
 ```
 
+#### random forest
+
+```python
+from pyspark.ml.classification import RandomForestClassifier, GBTClassifier
+from pyspark.ml.evaluation import BinaryClassificationEvaluator
+
+forest = RandomForestClassifier()
+
+forest.featureImportances # produces a SparseVector , 
+
+gbt = GBTClassifier()
+```
+
+
 ### References
 A lot of this was inspired by [this great DataCamp course](https://campus.datacamp.com/courses/machine-learning-with-pyspark) . 
 
