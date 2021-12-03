@@ -332,7 +332,9 @@ cv.transform(test_df)
 # You can get some quick documentation like this wow. Neat trick.
 cv.bestModel.explainParam("elasticNetParam")
 
-
+# Can look at the params like this too
+for param, val in cv.bestModel.extractParamMap():
+    print((param.name, val), f"({param.doc})")
 ```
 
 ### References
