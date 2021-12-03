@@ -262,7 +262,10 @@ pipeline = Pipeline(
 Spark uses a sparse representation of one-hot-encoded features
 ```python
 from pyspark.ml.feature import OneHotEncoderEstimator
-onehot = OneHotEncoderEstimator(inputCols=["type_blah"], outputCols=["type_one_hot"])
+onehot = OneHotEncoderEstimator(
+    inputCols=["type_blah"], 
+    outputCols=["type_one_hot"]
+)
 onehot.fit(df)
 
 onehot.categorySizes # <== gives how many categories processed.
