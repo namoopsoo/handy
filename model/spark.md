@@ -291,3 +291,24 @@ df = bucketizer.transform(df)
 ```
 Similar to categorical encoding benefiting from one hot encoding, bucketing will also benefit from one hot encoding
 
+#### Cross Validation
+Given a model and an evaluator, where the model can also be a pipeline, 
+
+```python
+frmo pyspark.ml.tuning import CrossValidator, ParamGridBuilder
+model = LinearRegression(labelCol="y_label")
+evaluator = RegressionEvaluator(labelCol="y_label")
+grid = ParamGridBuilder().build()
+
+cv = CrossValidator(
+    estimator=model,
+    estimatorParamMaps=grid,
+    evaluator=evaluator,
+    numFolds=5,
+    seed=42,
+)
+
+cv.fit(train_df)
+cv.avgMetrics # <== this is the average metric whatever it is.
+
+```
