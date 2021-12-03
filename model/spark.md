@@ -348,6 +348,114 @@ forest = RandomForestClassifier()
 forest.featureImportances # produces a SparseVector , 
 
 gbt = GBTClassifier()
+
+gbt.getNumTrees  # number of trees 
+
+```
+There is also an amazing debug output available with , `gbt.toDebugString`
+
+```python
+In [10]:
+print(gbt.toDebugString.split("Tree")[0])
+GBTClassificationModel (uid=GBTClassifier_c601194e39a1) with 20 trees
+  
+In [12]:
+print(gbt.toDebugString.split("Tree")[1])
+ 0 (weight 1.0):
+    If (feature 1 <= 9.6)
+     If (feature 2 <= 118.5)
+      If (feature 0 <= 2.5)
+       If (feature 1 <= 7.075)
+        If (feature 2 <= 109.5)
+         Predict: -0.5702479338842975
+        Else (feature 2 > 109.5)
+         Predict: -0.17391304347826086
+       Else (feature 1 > 7.075)
+        If (feature 2 <= 92.5)
+         Predict: -0.3117782909930716
+        Else (feature 2 > 92.5)
+         Predict: -0.1232876712328767
+      Else (feature 0 > 2.5)
+       If (feature 0 <= 10.5)
+        If (feature 2 <= 92.5)
+         Predict: -0.6527027027027027
+        Else (feature 2 > 92.5)
+         Predict: -0.48745046235138706
+       Else (feature 0 > 10.5)
+        If (feature 1 <= 7.075)
+         Predict: -0.47368421052631576
+        Else (feature 1 > 7.075)
+         Predict: -0.19090909090909092
+     Else (feature 2 > 118.5)
+      If (feature 0 <= 5.5)
+       If (feature 1 <= 7.74)
+        If (feature 2 <= 197.5)
+         Predict: -0.3770491803278688
+        Else (feature 2 > 197.5)
+         Predict: -0.0916030534351145
+       Else (feature 1 > 7.74)
+        If (feature 0 <= 4.5)
+         Predict: -0.10258418167580266
+        Else (feature 0 > 4.5)
+         Predict: 0.10580204778156997
+      Else (feature 0 > 5.5)
+       If (feature 0 <= 10.5)
+        If (feature 0 <= 8.5)
+         Predict: -0.27740863787375414
+        Else (feature 0 > 8.5)
+         Predict: -0.5332348596750369
+       Else (feature 0 > 10.5)
+        If (feature 1 <= 8.66)
+         Predict: -0.014492753623188406
+        Else (feature 1 > 8.66)
+         Predict: 0.23333333333333334
+    Else (feature 1 > 9.6)
+     If (feature 0 <= 6.5)
+      If (feature 2 <= 124.5)
+       If (feature 1 <= 16.509999999999998)
+        If (feature 0 <= 1.5)
+         Predict: 0.11760883690708251
+        Else (feature 0 > 1.5)
+         Predict: -0.023830031581969568
+       Else (feature 1 > 16.509999999999998)
+        If (feature 2 <= 50.5)
+         Predict: -0.23404255319148937
+        Else (feature 2 > 50.5)
+         Predict: 0.20102827763496145
+      Else (feature 2 > 124.5)
+       If (feature 1 <= 15.675)
+        If (feature 0 <= 1.5)
+         Predict: 0.2877813504823151
+        Else (feature 0 > 1.5)
+         Predict: 0.19178515007898894
+       Else (feature 1 > 15.675)
+        If (feature 2 <= 288.0)
+         Predict: 0.475375296286542
+        Else (feature 2 > 288.0)
+         Predict: 0.18562874251497005
+     Else (feature 0 > 6.5)
+      If (feature 0 <= 10.5)
+       If (feature 0 <= 8.5)
+        If (feature 2 <= 85.5)
+         Predict: -0.27121464226289516
+        Else (feature 2 > 85.5)
+         Predict: 0.0723354000590493
+       Else (feature 0 > 8.5)
+        If (feature 1 <= 13.16)
+         Predict: -0.4181152790484904
+        Else (feature 1 > 13.16)
+         Predict: -0.2569395017793594
+      Else (feature 0 > 10.5)
+       If (feature 1 <= 15.125)
+        If (feature 2 <= 60.5)
+         Predict: 0.3333333333333333
+        Else (feature 2 > 60.5)
+         Predict: 0.15768056968463887
+       Else (feature 1 > 15.125)
+        If (feature 2 <= 76.5)
+         Predict: 0.12863070539419086
+        Else (feature 2 > 76.5)
+         Predict: 0.37316017316017314
 ```
 
 
