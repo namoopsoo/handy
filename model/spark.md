@@ -1,4 +1,22 @@
 
+#### User Defined Functions
+* A user defined function needs to be defined with a  return type 
+* For instance, say there's a dataframe `df` with a `name` column, that have spaces between first and last names say, and you can split them up like so, only grabbing the first `2` , for example, by also using `F.lit` to specify a literal value being passed to the func as well.
+
+```python
+import pyspark.sql.functions as F
+from pyspark.types import ArrayType, StringType
+
+def split_name(name):
+    return name.split(" ")[:2]
+    
+udfSplitter = F.udf(split_name, ArrayType(StringType()))
+
+df = ...
+df = df.withColumn("separated_names", udfSplitter(df.name, F.lit(2)))
+
+```
+
 #### Quick Spark ml lib Logistic Regression Pipeline
 
 Given a dataframe with features you would like to use/transform in a LogisticRegression, similarly to sklearn taking an input without feature names, the spark flavor does the same, taking a single column for the input features.
