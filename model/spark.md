@@ -336,8 +336,29 @@ print("rmse", evaluator.evaluate(cv.bestModel.transform(test_df), {evaluator.met
 cv.bestModel.explainParam("elasticNetParam")
 
 # Can look at the params like this too
-for param, val in cv.bestModel.extractParamMap():
+for param, val in cv.bestModel.extractParamMap().items:
     print((param.name, val), f"({param.doc})")
+```
+for a RandomForestClassifier this will print for instance ... something like 
+
+```
+predictionCol prediction
+featureSubsetStrategy onethird
+maxMemoryInMB 256
+rawPredictionCol rawPrediction
+cacheNodeIds False
+probabilityCol probability
+impurity gini
+featuresCol features
+maxDepth 20
+labelCol label
+subsamplingRate 1.0
+maxBins 32
+checkpointInterval 10
+minInstancesPerNode 1
+minInfoGain 0.0
+numTrees 20
+seed 1720035589386331064
 ```
 
 #### random forest
