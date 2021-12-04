@@ -298,7 +298,7 @@ Similar to categorical encoding benefiting from one hot encoding, bucketing will
 Given a model and an evaluator, where the model can also be a pipeline, 
 
 ```python
-frmo pyspark.ml.tuning import CrossValidator, ParamGridBuilder
+from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 model = LinearRegression(labelCol="y_label")
 evaluator = RegressionEvaluator(labelCol="y_label")
 
@@ -328,6 +328,9 @@ cv.bestModel.transform(test_df)
 
 # Can also use the best model implicitly...
 cv.transform(test_df)
+
+# And look at a metric hence for that model, 
+print("rmse", evaluator.evaluate(cv.bestModel.transform(test_df), {evaluator.metricName: "rmse"}))
 
 # You can get some quick documentation like this wow. Neat trick.
 cv.bestModel.explainParam("elasticNetParam")
