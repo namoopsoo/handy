@@ -555,7 +555,38 @@ Check out what local file system  access is available , by
 display(dbutils.fs.ls("dbfs:/"))
 ```
 
+#### ML FLow 
+If you are not on the special "ML" instnce, you can install `mlflow` on a cluster like ..
 
+```python
+dbutils.library.installPyPI("mlflow", "1.0.0")
+dbutils.library.restartPython()
+```
+
+```
+
+```python
+import mlflow.sklearn
+with mlflow.start_run(run_name="Basic RF Experiment") as run:
+    rf = RandomForestRegressor()
+    rf.fit(X_train, y_train)
+    predictions = rf.predict(X_test)
+    
+    # log model
+    mlflow.sklearn.log_model(rf, "random-forest-model")
+    
+    mse = mean_squared_error(y_test, predictions)
+    
+    # log metrics
+    mlflow.log_metric("mse", mse)
+    
+    runID = run.info.run_uuid
+    experimentID = run.info.experiment_id
+    
+    print(f"Inside mlflow run with run id  {runID} and experiment id {experimentID}")
+    
+    
+```
 
 ### References
 A lot of this was inspired by [this great DataCamp course](https://campus.datacamp.com/courses/machine-learning-with-pyspark) . 
