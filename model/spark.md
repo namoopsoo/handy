@@ -25,6 +25,28 @@ df.select("residual sugar", "sugar_rounded").show(5)
 +--------------+-------------+
 ```
 
+Also can split a col to a json array 
+Here imagine there is a column , "_c0" which has tab separated data, 
+
+```python
+df = df.withColumn("col_split", F.split(F.col("_c0"), "\t"))
+
+```
+And casting 
+
+```python
+df = df.withColumn("foo", df["foo"].cast("double"))
+```
+
+
+#### unique ids!
+
+```python
+df = df.withColumn("id", F.monotonically_increasing_id())
+df.write.parquet("foo.parquet")
+```
+
+
 #### User Defined Functions
 * A user defined function needs to be defined with a  return type 
 * For instance, say there's a dataframe `df` with a `name` column, that have spaces between first and last names say, and you can split them up like so, only grabbing the first `2` , for example, by also using `F.lit` to specify a literal value being passed to the func as well.
