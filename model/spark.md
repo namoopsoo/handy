@@ -566,6 +566,9 @@ dbutils.library.restartPython()
 ```
 
 ```python
+import pylab
+import matplotlib.pyplot as plt
+
 import mlflow.sklearn
 with mlflow.start_run(run_name="Basic RF Experiment") as run:
     rf = RandomForestRegressor()
@@ -584,6 +587,14 @@ with mlflow.start_run(run_name="Basic RF Experiment") as run:
     experimentID = run.info.experiment_id
     
     print(f"Inside mlflow run with run id  {runID} and experiment id {experimentID}")
+    
+    fig, ax = plt.subplots()
+    sns.residplot(predictions, y_test, lowess=True)
+    plt.xlabel("Preds")
+    plt.ylabel("Residuals")
+    
+    pylab.savefig("foo_file.png")  # saving locally 
+    mlflow.log_artifacts("foo_file", "residuals.png")  # and also as an artifact
     
     
 ```
