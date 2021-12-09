@@ -1,4 +1,11 @@
 
+#### Read 
+
+```python
+loc = "dbfs:/databricks-datasets/wine-quality/winequality-red.csv"
+blah_df = spark.read.csv(loc, sep=";", header=True)
+```
+
 #### User Defined Functions
 * A user defined function needs to be defined with a  return type 
 * For instance, say there's a dataframe `df` with a `name` column, that have spaces between first and last names say, and you can split them up like so, only grabbing the first `2` , for example, by also using `F.lit` to specify a literal value being passed to the func as well.
