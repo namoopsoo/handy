@@ -500,6 +500,14 @@ print(gbt.toDebugString.split("Tree")[1])
          Predict: 0.37316017316017314
 ```
 
+### Special databricks stuff 
+Check out what local file system  access is available , by 
+
+```
+display(dbutils.fs.ls("dbfs:/"))
+```
+
+
 
 ### References
 A lot of this was inspired by [this great DataCamp course](https://campus.datacamp.com/courses/machine-learning-with-pyspark) . 
