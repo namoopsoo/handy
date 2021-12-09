@@ -6,6 +6,25 @@ loc = "dbfs:/databricks-datasets/wine-quality/winequality-red.csv"
 blah_df = spark.read.csv(loc, sep=";", header=True)
 ```
 
+#### Map an existing function 
+
+```python
+import spark.sql.functions as F
+loc = "dbfs:/databricks-datasets/wine-quality/winequality-red.csv"
+df = spark.read.csv(loc, sep=";", header=True)
+df = df.withColumn("sugar_rounded", F.round(df["residual sugar"]))
+df.select("residual sugar", "sugar_rounded").show(5)
+```
+
+```
++--------------+-------------+
+|residual sugar|sugar_rounded|
++--------------+-------------+
+| 1.9          |          2.0|
+| 2.6          |          3.0|
++--------------+-------------+
+```
+
 #### User Defined Functions
 * A user defined function needs to be defined with a  return type 
 * For instance, say there's a dataframe `df` with a `name` column, that have spaces between first and last names say, and you can split them up like so, only grabbing the first `2` , for example, by also using `F.lit` to specify a literal value being passed to the func as well.
