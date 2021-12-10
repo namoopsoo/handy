@@ -560,6 +560,13 @@ display(dbutils.fs.ls("dbfs:/"))
 display(dbutils.fs.ls(f"abfss://{container_name}@{storage_account_name}.dfs.core.windows.net"))
 ```
 
+And the above require special configuration addition too...
+
+```
+spark.databricks.pyspark.trustedFilesystems org.apache.hadoop.fs.LocalFileSystem,com.databricks.adl.AdlFileSystem,com.databricks.s3a.S3AFileSystem,shaded.databricks.org.apache.hadoop.fs.azure.NativeAzureFileSystem,shaded.datrabricks.org.apache.hadoop.fs.azurebfs.SecureAzureBlobFileSystem
+```
+
+
 #### ML FLow 
 If you are not on the special "ML" instnce, you can install `mlflow` on a cluster like ..
 
