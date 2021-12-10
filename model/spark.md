@@ -549,10 +549,15 @@ print(gbt.toDebugString.split("Tree")[1])
 ```
 
 ### Special databricks stuff 
-Check out what local file system  access is available , by 
+* Check out what local file system  access is available , by 
 
-```
+```python
 display(dbutils.fs.ls("dbfs:/"))
+```
+* how about ADLS/blob storage on ADLS Azure ??
+
+```python
+display(dbutils.fs.ls(f"abfss://{container_name}@{storage_account_name}.dfs.core.windows.net"))
 ```
 
 #### ML FLow 
