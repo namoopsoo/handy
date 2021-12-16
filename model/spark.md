@@ -611,6 +611,33 @@ with mlflow.start_run(run_name="Basic RF Experiment") as run:
     
 ```
 
+#### Faster column renaming
+For instance if you want to rename multiple columns , instead of , using a for loop like 
+
+```python
+import spark.sql.functions as F
+
+cols = df.columns
+for c in cols:
+    df = df.withColumn(c + "_blahblah", F.col(c))
+
+df = df.select(*[c + "_blahblah" for c in cols])
+```
+* Slightly cleaner first maybe to use `withColumnRenamed`
+
+```python
+cols = df.columns
+for c in cols:
+    df = df.withColumnRenamed(c, c + "_blahblah")
+```
+* And I wonder if the above can be faster if it is chained, `df.withColumnRenamed(c1, c2).withColumnRenamed(c2, c3)` . But not sure
+* But other than that, a list comprehension with `.alias()` , might be faster too. Have not yet checked..
+
+```python
+df = df.select(*[F.col(c).alias(c + "_blahblah") for c in df.columns])
+```
+
+
 ### References
 A lot of this was inspired by [this great DataCamp course](https://campus.datacamp.com/courses/machine-learning-with-pyspark) . 
 
