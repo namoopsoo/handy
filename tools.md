@@ -2,6 +2,19 @@
 #### ag the silver searcher
 * [here](https://geoff.greer.fm/2011/12/27/the-silver-searcher-better-than-ack/)
 * usually `the_silver_searcher` on homebrew
+* preserve color when paging! (This is amazing!)
+
+  ```
+  ag "search term" --pager "less -R"
+  ```
+
+#### Faster and more colorful find!
+* Wow `fd` , `brew install fd` , from https://github.com/sharkdp/fd 
+* Preserve color when paging like this
+
+  ```
+  fd "foo" --color always |less -R
+  ```
 
 #### jq
 * command line json parsing 
