@@ -11,5 +11,5 @@ wlan_mgt.ssid == “your_SSID”
 * and this one 
 
 ```
-wlan.addr == "xx:xx:xx:xx:xx:xx"
+wlan.addr == xx:xx:xx:xx:xx:xx
 ```
