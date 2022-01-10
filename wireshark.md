@@ -8,8 +8,18 @@
 wlan_mgt.ssid == “your_SSID”
 ```
 
-* and this one 
+* and this one hmm did not work for me 
 
 ```
 wlan.addr == xx:xx:xx:xx:xx:xx
 ```
+
+* as opposed this, 
+
+```
+eth.addr == xx:xx:xx:xx:xx:xx
+```
+
+which did work for me.
+
+* Maybe I can't see the low level 802.11 control packets/frames somehow.
