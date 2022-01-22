@@ -8,6 +8,8 @@ set softtabstop=4
 set tabstop=4 
 set shiftwidth=4 
 set expandtab 
+filetype plugin indent on
+
 set autochdir
 
 set cpoptions+=>
@@ -46,8 +48,6 @@ hi IncSearch guibg=#f6c427
 " Pathogen
 """"""""""""""""""""""""""""""
 execute pathogen#infect()
-filetype plugin indent on
-
 
 " CTRLP
 " https://github.com/kien/ctrlp.vim
