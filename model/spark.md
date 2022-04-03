@@ -638,6 +638,49 @@ df = df.select(*[F.col(c).alias(c + "_blahblah") for c in df.columns])
 ```
 
 
+
+#### Comparing if two large dataframes are the close
+
+```python
+import spark.sql.functions as F
+from functools import reduce
+from operators import or_
+
+# Writing some of this from memory, so I think have to fix some parts later...
+double_cols = [col for col in df.columns if df.getSchema()[col].dataType == "double"]
+
+# If the mean is > 1 then can round w/ precision=0
+col_means = df.agg({col: "Mean" for col in double_cols})
+
+double_actually_int_cols = [col for col, mean in col_means.items() if mean > 1]
+double_actually_double_cols = [col for col, mean in col_means.items() if mean <= 1]
+
+conditions = [
+    F.abs(
+        (F.col(f"x.{col}"))
+        - (F.col(f"y.{col}"))
+    ) > 0.01
+    for col in double_actually_double_cols
+] + [
+    F.abs(
+        (F.col(f"x.{col}"))
+        - (F.col(f"y.{col}"))
+    ) > 1
+    for col in double_actually_int_cols
+]
+
+condition = reduce(or_, conditions)
+
+index_cols = ["id"]
+
+# Here for instance, just selecting the index cols matching the conditions
+diffdf = df.alias("x").join(df.alias("y"), on=index_cols).where(
+    condition
+).select(index_cols)
+```
+
+
+
 ### References
 A lot of this was inspired by [this great DataCamp course](https://campus.datacamp.com/courses/machine-learning-with-pyspark) . 
 
