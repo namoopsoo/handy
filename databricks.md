@@ -58,17 +58,17 @@ times
 
 ```python
 # Cell 1
-dbutils.widgets.text ( "root", "potato" )
-print (dbutils.widgets. get ("root" )) # => "potato"
-dbutils.widgets.remove ("root" )
+dbutils.widgets.text ("root", "potato")
+print (dbutils.widgets.get("root")) # => "potato"
+dbutils.widgets.remove ("root"=)
 
 dbutils.widgets.text("root", "yam")
-print (dbutils.widgets. get ("root," ) # =>"yam"
+print (dbutils.widgets.get("root")) # =>"yam"
 dbutils.widgets.remove ("root")
 
-dbutils.widgets.text("root", "potato" )
-print (dbutils.widgets.get ( "root" )) # => "potato"
-dbutils.widgets.remove ("root" )
+dbutils.widgets.text("root", "potato")
+print (dbutils.widgets.get("root")) # => "potato"
+dbutils.widgets.remove ("root")
 ```
 
 (4) If you set a widget in "notebookA" and then "%run notebookB", "notebookB" will be able to read
