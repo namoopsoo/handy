@@ -1,5 +1,5 @@
 ### Mainly notes from reaading the Natural Language Processing with Transformers book 
-
+Really nice book! I have the urge to write down for myself some snippets so I can more easily refer to them later.
 
 #### Read a dataset to pandas 
 
