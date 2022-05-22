@@ -22,6 +22,40 @@ actual		||
 1|	32	|22
 
 
+#### Also there is a super nice helper in scikitlearn 
+Below, using some pre-baked results from running some of the chapter 2 code from https://transformersbook.com/ . 
+
+So first, when using `ConfusionMatrixDisplay` out of the box, I get
+```python
+from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
+
+with plt.style.context('dark_background'):
+    cm = confusion_matrix(y_valid, y_preds, normalize="true")
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
+    disp.plot()
+    plt.show()    
+
+```
+<img src="https://github.com/namoopsoo/handy/blob/master/assets/Screen%20Shot%202022-05-22%20at%205.49.35%20PM--standard.png" width="50%">
+
+And I can see why that was not used in the book haha because the modified version, below, looks much better indeed, 
+```python
+from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix 
+def plot_confusion_matrix(y_preds, y_true, labels):
+    with plt.style.context("dark_background"):
+        cm = confusion_matrix(y_true, y_preds, normalize="true")
+        fix, ax = plt.subplots(figsize=(6, 6))
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
+        disp.plot(cmap="Blues", values_format=".2f", ax=ax, colorbar=False)
+        plt.title("Normalized confusion matrix")
+        plt.show()
+
+y_preds = lr_clf.predict(X_valid)     
+plot_confusion_matrix(y_preds, y_valid, labels)
+
+```
+<img src="https://github.com/namoopsoo/handy/blob/master/assets/Screen%20Shot%202022-05-22%20at%205.50.22%20PM--nice.png"  width="50%">
+
 
 ### f1
 ```python
