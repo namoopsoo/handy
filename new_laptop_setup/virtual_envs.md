@@ -1,4 +1,4 @@
-Nice that now python has this built in method for creating virtual environments
+Nice that now python has this built in method for creating virtual environments per [docs](https://docs.python.org/3/library/venv.html)
 
 ```sh
 # like this 
