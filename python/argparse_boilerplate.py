@@ -2,24 +2,23 @@ import argparse
 
 def bake_options():
     return [
-            [['--verbose', '-v'],
-                {'action': 'store_true',  # stores boolean
-                    'help': 'pass to to be verbose with commands'},
-                ],
-            [['--dry-run', '-D'],
-                {'action': 'store_true',
-                    'help': 'Dry run. Just print the command.'},],
+        [['--verbose', '-v'],
+            {'action': 'store_true',  # stores boolean
+                'help': 'pass to to be verbose with commands'},
+            ],
+        [['--dry-run', '-D'],
+            {'action': 'store_true',
+                'help': 'Dry run. Just print the command.'},],
 
-            [['--input-file', '-f'],
-                {'action': 'store',
-                    'help': 'Name of input file.'},],
-                    'help': 'Dry run. Just print the command.  '},
-            ],
-            [['--color', '-c'],
-                {'action': 'store',  # Stores the value given
-                    'help': 'Dry run. Just print the command.  '},
-            ],
-                ]
+        [['--source-dir', '-s'],
+            {'action': 'store',
+                'help': 'Dir to read files from.'},],
+        [['--color', '-c'],
+            {'action': 'store',  # Stores the value given
+                'help': 'Dry run. Just print the command.  '},
+        ],
+    ]
+
     ##
     #             help='',
     #             default='',
@@ -36,8 +35,9 @@ def do():
             for x in bake_options()]
 
     # Collect args from user.
-    args = parser.parse_args()
+    kwargs = dict(vars(parser.parse_args()))
 
-    print(vars(args))
-    
-do()
+    print("kwargs", kwargs)
+
+if __name__ == "__main__":    
+    do()
