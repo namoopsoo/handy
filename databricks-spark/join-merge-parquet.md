@@ -1,4 +1,9 @@
+### comparing really large spark dataframes
+I had this usecase where I wanted to be able to check if very large multi-million row and multi-thousand column dataframes were equal, but the advice online about using `df1.subtract(df2)` just was not cutting it because it was just too slow. It seems to me the `df1.subtract(df2)` approach more or less is a `O(n^2)` approach where it is necessary to compare each row in `df1` with each row in `df2`. Instead I was wondering, hey if there are known index columns in these dataframes, maybe we can cheat a little and join them first and then do the comparison after joining them.
 
+What I came up with below so far does not handle the case yet of index keys that are not common. I would like to add that at some point. And for now this also requires the schemas of the dataframes to be the same.
+
+```python
 def join_compare(df1, df2, index_cols, head_n_rows=None, cache=True):
     # TODO fix to be outer join I think is needed? For now assumes all index cols match fully.
     assert_schema_equality_ignore_nullable(df1.schema, df2.schema)
@@ -86,3 +91,4 @@ def join_compare(df1, df2, index_cols, head_n_rows=None, cache=True):
             for col in string_cols
         ],
     )
+```
