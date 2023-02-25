@@ -140,3 +140,7 @@ utils.class_weight.compute_class_weight()
 utils.class_weight.compute_sample_weight()
 
 ```
+
+#### Other handy references
+
+https://ml-cheatsheet.readthedocs.io/
