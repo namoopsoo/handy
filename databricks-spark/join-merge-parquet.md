@@ -45,7 +45,7 @@ def join_compare(df1, df2, index_cols, head_n_rows=None, cache=True):
         or_,
         (
             [
-                (f.round(f.abs(f.col(f"x.{col)") - f.col(f"y.{col}"))) > 0)
+                (f.round(f.abs(f.col(f"x.{col}") - f.col(f"y.{col}"))) > 0)
                 for col in (integer_types_double_on_paper + integer_cols)
             ]
         ),
