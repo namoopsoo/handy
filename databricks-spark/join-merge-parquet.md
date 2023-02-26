@@ -91,4 +91,31 @@ def join_compare(df1, df2, index_cols, head_n_rows=None, cache=True):
             for col in string_cols
         ],
     )
+
+
+    print("starting doubles_diff")
+    diff_dfs["doubles_diffdf"] = (
+        df1.alias("x").join(df2.alias("y"), index_cols,
+                            ).where(doubles_condition).select(*index_cols, *rounded_cols)
+    )
+
+    print("starting integer diff")
+    diff_dfs["integer_diffdf"] = (
+        df1.alias("x").join(df2.alias("y"), index_cols,
+                            ).where(integer_condition).select(
+                                *index_cols, *select_integer_cols)
+    )
+
+    print("starting string diff")
+    diff_dfs["string_diffdf"] = (
+        df1.alias("x").join(df2.alias("y"), index_cols,
+                            ).where(string_condition).select(*index_cols, *select_string_cols)
+    )
+
+    if cache:
+        print("caching")
+        for k in diff_dfs.keys():
+            diff_dfs[k] = diff_dfs[k].cache()
+    return diff_dfs
+
 ```
