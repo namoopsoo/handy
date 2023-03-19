@@ -317,6 +317,36 @@ with plt.style.context('fivethirtyeight'):
 
 ```
 
+#### Another way of preventing smushing 
+Similar to the above, I learned about a non `pylab` native `matplotlib.pyplot` option for avoiding multi plot figure covering each other, overlapping , getting crammed. (Just including many synonyms for crowding so I can find this more easily :) )
+
+Basically if you define, a figure, you can do this , as I learned from [stacko](https://stackoverflow.com/questions/6541123/improve-subplot-size-spacing-with-many-subplots) recently,
+
+```python
+fig = plt.figure(figsize=(12,12))
+for i in range(5):
+    ax = fig.add_subplot(int(f"51{i + 1}"))
+    ...
+fig.tight_layout()
+```
+And 
+```python
+plt.tight_layout()
+```
+is also available, and when I was trying this out, I used the latter because the former was not quite working for me.
+
+Maybe the former was not working because I used `fig.add_suplot` as opposed to `plt.subplots` as shown in the stacko example I linked above. ^^ So below is the example,
+_show adding it verbatim here below_  
+```python
+import matplotlib.pyplot as plt
+
+fig, axes = plt.subplots(nrows=4, ncols=4, figsize=(8, 8))
+fig.tight_layout() # Or equivalently,  "plt.tight_layout()"
+
+plt.show()
+```
+
+
 #### broken bar chart intended for gantt and I suspect useful as a waterfall for walltimes
 * Borrowing this beautiful example from [Geeks for Geeks](https://www.geeksforgeeks.org/python-basic-gantt-chart-using-matplotlib/)
 ```python
