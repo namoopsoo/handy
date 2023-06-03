@@ -11,3 +11,5 @@ for file in ${first}*;
     echo "$file";echo "============="; 
     cat "$file";echo  ; 
 done
+
+echo "done with $file"
