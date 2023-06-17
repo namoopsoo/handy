@@ -8,8 +8,6 @@ set softtabstop=4
 set tabstop=4 
 set shiftwidth=4 
 set expandtab 
-filetype plugin indent on
-
 set autochdir
 
 set cpoptions+=>
@@ -17,8 +15,9 @@ set cpoptions+=>
 syntax match Tab /\t/
 hi Tab gui=underline guifg=blue ctermbg=blue 
 
-colorscheme github
-colorscheme solarized8 " https://github.com/lifepillar/vim-solarized8
+" colorscheme github
+" colorscheme solarized8 " https://github.com/lifepillar/vim-solarized8
+colorscheme slate
 
 set background=dark " light
 
@@ -26,9 +25,9 @@ set hlsearch
 set incsearch
 set showmatch
 
-
 let g:netrw_liststyle= 4
 
+" press enter (aka <CR>) to stop highlighting (aka :noh) after searching
 nnoremap <CR> :noh<CR><CR>
 " attribution: http://stackoverflow.com/a/1037182/472876
 " nnoremap <esc> :noh<return><esc>
@@ -43,7 +42,9 @@ nnoremap <CR> :noh<CR><CR>
 hi Search guibg=#f6c427
 hi IncSearch guibg=#f6c427
 
+filetype plugin indent on
 
+set ruler
 """"""""""""""""""""""""""""""
 " Pathogen
 """"""""""""""""""""""""""""""
