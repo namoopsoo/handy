@@ -17,7 +17,11 @@ export PATH=/Applications/MacVim.app/Contents/bin:$PATH
 # export PATH="$HOME/bin/rar:$PATH"
 # export PATH="$HOME/bin:$PATH"
 
+# use vi in bash
 set -o vi
 
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html#index-HISTCONTROL
 export HISTCONTROL=ignorespace
+
+# let "less" be case insensitive by default ! 
+LESS=-Ri
