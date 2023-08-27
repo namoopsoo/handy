@@ -68,3 +68,7 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+
+" syntax highlighting in code fences, https://www.reddit.com/r/vim/comments/fk48jw/markdown_code_syntax_highlighting/
+let g:markdown_fenced_languages = ['python']
+
