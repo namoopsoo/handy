@@ -260,7 +260,7 @@ image = train_mages[3]
 ```
 
 #### Plot colors
-* With tips from [here](https://stackoverflow.com/questions/14088687/how-to-change-plot-background-color)
+With tips from [here](https://stackoverflow.com/questions/14088687/how-to-change-plot-background-color), for setting the background color to green instead of transparent so that when displaying on a dark-mode page, the black axis letters are still visible instead of hidden, opaque, invisible, not seen, missing, cannot see them, or assumed cut off, etc. 
 ```python
 # print(plt.style.available)
 # ['Solarize_Light2', '_classic_test_patch', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn', 'seaborn-bright', 'seaborn-colorblind', 'seaborn-dark', 'seaborn-dark-palette', 'seaborn-darkgrid', 'seaborn-deep', 'seaborn-muted', 'seaborn-notebook', 'seaborn-paper', 'seaborn-pastel', 'seaborn-poster', 'seaborn-talk', 'seaborn-ticks', 'seaborn-white', 'seaborn-whitegrid', 'tableau-colorblind10']
