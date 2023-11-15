@@ -1,0 +1,17 @@
+
+
+Host github_one
+    Hostname github.com
+    IdentityFile /Users/michal/.ssh/mygithub
+    IdentitiesOnly yes
+
+
+Host github_two
+    Hostname github.com
+    IdentityFile /Users/michal/.ssh/another_github
+    IdentitiesOnly yes
+
+
+Host *
+    HostkeyAlgorithms +ssh-rsa
+    PubkeyAcceptedAlgorithms +ssh-rsa
