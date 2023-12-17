@@ -346,8 +346,23 @@ fig.tight_layout() # Or equivalently,  "plt.tight_layout()"
 plt.show()
 ```
 
+#### How to use `plt.subplots` , iterate across the axes, 
+Here is an example, three histograms across three columns, `category, name, description`, 
+```python
+fig, axes = plt.subplots(figsize=(12,6), nrows=3, ncols=1)
+fig.patch.set_facecolor("xkcd:mint green")
+plt.tight_layout()
+for i, col in enumerate(["category", "name", "description"]):
+    menusdf[col + "_num_tokens"] = menusdf[col].map(lambda x: len(x.split(" "))) #  if isinstance(x, str) else 0
+    ax = axes[i]
+    
+    ax.hist(menusdf[col + "_num_tokens"], bins=50)
+    ax.set(title=f"{col} num tokens")
+```
+<img width="864" alt="image" src="https://github.com/namoopsoo/handy/assets/2048242/be811f67-1f03-4800-8355-40dddc5ec2b0">
 
-#### broken bar chart intended for gantt and I suspect useful as a waterfall for walltimes
+
+#### Broken bar chart intended for gantt and I suspect useful as a waterfall for walltimes
 * Borrowing this beautiful example from [Geeks for Geeks](https://www.geeksforgeeks.org/python-basic-gantt-chart-using-matplotlib/)
 ```python
 # Declaring a figure "gnt"
