@@ -1,3 +1,5 @@
+[[_TOC_]]
+
 #### List indexes
 * From [here](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-list-indexes/)
 ```sql
@@ -574,5 +576,17 @@ sally|3|eagles|4|seagulls
 sally|4|seagulls|[NULL]|[NULL]
 jan|5|the philosophical of flying|[NULL]|[NULL]
 
+
+## using cte for variables
+from [this stacko](https://stackoverflow.com/a/16552441/472876) , really handy since yea I don't recall postgresql having declare statements like microsoft sql?
+```sql
+WITH myconstants (var1, var2) as (
+   values (5, 'foo')
+)
+SELECT *
+FROM somewhere, myconstants
+WHERE something = var1
+   OR something_else = var2;
+```
 
 
