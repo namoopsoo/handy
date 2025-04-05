@@ -28,7 +28,7 @@ def bake_options():
     #             type='',
             
 
-def do():
+def read_kwargs():
     parser = argparse.ArgumentParser()
 
     [parser.add_argument(*x[0], **x[1])
@@ -36,8 +36,8 @@ def do():
 
     # Collect args from user.
     kwargs = dict(vars(parser.parse_args()))
+    return kwargs
 
-    print("kwargs", kwargs)
 
 if __name__ == "__main__":    
     do()
